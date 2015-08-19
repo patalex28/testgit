@@ -1,11 +1,12 @@
 package com.kata.tennisGame;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Player {
 
-	public static final List<String> pointsDescription = Arrays.asList("love", "fifteen", "thirty", "forty");
+	public static final List<String> pointsDescription = new ArrayList<>(Arrays.asList("love", "fifteen", "thirty", "forty"));
 	private final String name;
 	private int score;
 	
