@@ -47,17 +47,21 @@ public class testBanque {
 	}
 	
 	@Test
-	public void Si_solde_compteCourant_Inferieur_au_montant_du_virement_alors_impossible_de_faire_le_virement() {
+	public void Si_solde_compteCourant_Inferieur_au_montant_du_virement_alors_impossible_de_faire_le_virement_et_recuperation_d_un_exception() {
 		Compte monCompteCourant = new CompteCourant(12345, "Compte Courant Alex", new BigDecimal("120.10"));
 		Compte monCompteEpargne = new CompteEpargne(54564, "Compte Epargne Alex", new BigDecimal("80.20"));
 		OperationCompte ope = new OperationCompte();
-		ope.virement(monCompteCourant, monCompteEpargne, new BigDecimal("130"));
-		assertEquals("120.10", monCompteCourant.getSolde().toString());
-		assertEquals("80.20", monCompteEpargne.getSolde().toString());
+		try{
+			ope.virement(monCompteCourant, monCompteEpargne, new BigDecimal("130"));
+			fail("Le virement n'aurait pas dû être effectué");
+		}
+		catch(VirementException expected){
+			System.out.println(expected.getMessage());
+			assertEquals("120.10", monCompteCourant.getSolde().toString());
+			assertEquals("80.20", monCompteEpargne.getSolde().toString());
+		}
 	}
 	
-	
-
 
 
 }
